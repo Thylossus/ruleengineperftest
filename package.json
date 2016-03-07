@@ -1,0 +1,16 @@
+{
+  "name": "ruleengineperf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.4.1",
+    "lodash": "^4.6.1",
+    "nools": "^0.4.1"
+  }
+}
