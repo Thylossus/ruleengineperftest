@@ -6,7 +6,7 @@ const EXCHANGE = 'demo';
 (function() {
   'use strict';
 
-  let open = amqp.connect('amqp://192.168.99.100:32769');
+  let open = amqp.connect('amqp://192.168.99.100:32773');
   class Receiver extends EventEmitter {};
   let receiver = new Receiver();
 

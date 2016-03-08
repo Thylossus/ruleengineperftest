@@ -12,7 +12,7 @@ const EXCHANGE = 'demo';
   let status = ['error', 'warning', 'ok'];
 
   exports.start = (interval) => {
-    let open = amqp.connect('amqp://192.168.99.100:32769');
+    let open = amqp.connect('amqp://192.168.99.100:32773');
     open.then((conn) => {
       conn.createChannel().then((channel) => {
         channel.assertQueue(EXCHANGE);
