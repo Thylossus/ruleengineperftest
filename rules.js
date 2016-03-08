@@ -20,7 +20,35 @@ const nools = require('nools');
     return valid;
   };
 
+  let multipleErrors = function multipleErrors() {
+    // TODO: find a way to transform this into a pure function
+    let facts = session.getFacts();
+    if (!facts) {
+      return false;
+    }
+
+    let numFacts = facts.length;
+    let n = 10;
+    let threshold = 0.5;
+    let filter = 'error';
+
+
+    let lastNFacts = facts.slice(numFacts - n);
+    let filteredEvents = lastNFacts.reduce((sum, event) => {
+      if (event.status === filter) {
+        sum += 1;
+      }
+      return sum;
+    }, 0);
+
+    return (filteredEvents / n) >= threshold;
+  };
+
   let flow = nools.flow('demo', (flow) => {
+    flow.rule('multiple errors', {scope: {multipleErrors: multipleErrors}}, [Event, 'e', 'multipleErrors(e)'], (facts) => {
+      console.log('received 5 error events in the 10 last events');
+    });
+
     flow.rule('error', {scope: {timeConstraint: timeConstraint}}, [Event, 'e', 'e.status === "error" && timeConstraint(e)'], (facts) => {
       console.log('received an error event');
     });
